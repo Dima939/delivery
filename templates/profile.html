@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+</head>
+<body>
+    <div class="container">
+        <div class="link"><a href="/">На главную</a></div>
+        <div class="balance">{{user.balance}} BYN</div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form">
+                <label>Имя</label>
+                <input type="text" name="name" value="{{user.name}}"><br/>
+                <label>Адрес</label>
+                <input type="text" name="address" value="{{user.address}}"><br/>
+                <label>Email</label>
+                <input type="email" name="email" value="{{user.email}}"><br/>
+                <label>Телефон</label>
+                <input type="text" name="phone" value="{{user.phone}}"><br/>
+            </div>
+            {% if change %}
+            <div class="change">Данные успешно изменены</div>
+            {% endif %}
+            <div class="btn">
+                <input type="submit" value="Сохранить">
+            </div>
+        </form>
+    </div>
+</body>
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background: url(/media/images/bg.jpg) no-repeat;
+        background-size: cover;
+    }
+    /* MAIN */
+    .container{
+        margin: auto;
+        margin-top: 100px;
+        background-color: #eeeeee;
+        border-radius: 20px;
+        text-align: center;
+        border: 5px solid #757575;
+        width: 450px;
+        height: 430px;
+    }
+    .link{
+        margin: 10px;
+    }
+    .link a{
+        font-size: 20px;
+        text-decoration: none;
+        color: #424242;
+        transition: color 0.2s linear;
+    }
+    a:hover{
+        color: silver;
+    }
+    .balance{
+        font-size: 25px;
+        margin: 20px;
+        color: #424242;
+        font-weight: bold;
+    }
+    form{
+        margin-top: 20px;
+    }
+    .form input{
+        border: 2px solid silver;
+        border-radius: 10px;
+        width: 250px;
+        height: 28px;
+        margin: 10px;
+    }
+    .form label{
+        color: #424242;
+        font-size: 20px;
+    }
+    .btn input{
+        margin-top: 25px;
+        padding: 5px 40px;
+        font-size: 15px;
+        border: 2px solid silver;
+        border-radius: 10px;
+        transition: 0.2s linear;
+    }
+    .btn input:hover{
+        color: white;
+        background-color: silver;
+    }
+</style>
+</html>

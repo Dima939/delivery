@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+</head>
+<body>
+    <div class="container">
+        <div class="link"><a href="/cart/">Назад</a></div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form">
+                <label>Адрес</label>
+                <input type="text" name="address" required="required" value="{{user.address}}">
+            </div>
+            <div class="sum">Итого к оплате: {{sum}} BYN</div>
+            <div class="btn">
+                <input type="submit" value="Оформить заказ">
+            </div>
+        </form>
+    </div>
+</body>
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background: url(/media/images/bg.jpg) no-repeat;
+        background-size: cover;
+    }
+    /* MAIN */
+    .container{
+        margin: auto;
+        margin-top: 150px;
+        background-color: #eeeeee;
+        border-radius: 20px;
+        text-align: center;
+        border: 5px solid #757575;
+        width: 450px;
+        height: 300px;
+    }
+    a{
+        margin: 10px;
+        text-decoration: none;
+        color: #424242;
+        transition: color 0.2s linear;
+    }
+    a:hover{
+        color: silver;
+    }
+    .link{
+        font-size: 20px;
+        margin: 20px;
+    }
+    form{
+        margin-top: 23px;
+    }
+    .form input{
+        border: 2px solid silver;
+        border-radius: 10px;
+        width: 250px;
+        height: 28px;
+        margin: 13px;
+    }
+    .form label{
+        color: #424242;
+        font-size: 20px;
+    }
+    .sum{
+        color: #424242;
+        margin: 23px;
+        font-size: 20px;
+    }
+    .btn input{
+        margin-top: 23px;
+        padding: 5px 40px;
+        font-size: 15px;
+        border: 2px solid silver;
+        border-radius: 10px;
+        transition: 0.2s linear;
+    }
+    .btn input:hover{
+        color: white;
+        background-color: silver;
+    }
+</style>
+</html>

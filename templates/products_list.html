@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">Назад</a>
+        {% if login %}
+        <div class="header_content">
+            {% if user.name %}
+            <span class="user_name">{{user.name}}</span>
+            {% else %}
+            <span class="user_name">User{{user.pk}}</span>
+            {% endif %}
+            <span class="balance">{{user.balance}} BYN</span>
+            <a href="/cart/">Корзина</a>
+            <a href="/profile/">Профиль</a>
+            <a href="/home/">Выход</a>
+        </div>
+        {% else %}
+        <div class="header_content">
+            <a href="/login/login/">Вход</a><b>/</b><a href="/login/register/">Регистрация</a>
+        </div>
+        {% endif %}
+    </header>
+    <main>
+        <div class="container">
+            {% for product in products %}
+            <div class="item">
+                <div class="item_content">
+                    <a href="/product/{{product.name}}"><img src="{{product.image.url}}"></a>
+                    <div class="item_text">
+                        <div class="item_title">
+                            <a href="/product/{{product.name}}"><h2>{{product.name}}</h2></a>
+                        </div>
+                        <div class="item_price">{{product.price}} BYN</div>
+                    </div>
+                    {% if login %}
+                    <button onclick="window.location.href = '/cart/{{product.pk}}'">В корзину</button>
+                    {% else %}
+                    <button onclick="window.location.href = '/login/register/'">В корзину</button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <div class="footer_content">
+            <h3>Some content...</h3>
+        </div>
+    </footer>
+</body>
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background: url(/media/images/bg.jpg) no-repeat;
+        background-size: cover;
+    }
+    /* HEADER */
+    header{
+        display: flex;
+        justify-content: space-between;
+        color: #424242;
+        font-size: 18px;
+        background-color: silver;
+        height: 50px;
+        border-bottom: 5px solid #757575;
+    }
+    .header_content{
+        margin-right: 60px;
+        margin-top: 13px;
+    }
+    header a{
+        margin: 0 10px;
+        transition: color 0.2s linear;
+    }
+    .back{
+        margin-top: 13px;
+        margin-left: 50px;
+    }
+    .user_name, .balance{
+       margin: 0 10px;
+       font-weight: bold;
+    }
+    header a:hover{
+        color: white;
+    }
+    /* MAIN */
+    main{
+        margin-top: 50px;
+        border: 0px;
+    }
+    main .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    .item_content{
+        display: flex;
+        flex-direction: column;
+    }
+    .item{
+        text-align: center;
+        margin: 20px;
+        width: 310px;
+    }
+    .item img:hover{
+        opacity: 0.6;
+    }
+    .item h2{
+        color: #424242;
+        transition: color 0.2s linear;
+        font-size: 23px;
+        margin: 0;
+    }
+    .item h2:hover{
+        color: aliceblue;
+    }
+    .item_title{
+        height: 35px;
+        background-color: silver;
+        border-bottom: 5px solid #757575;
+    }
+    .item img{
+        transition: opacity 0.2s linear;
+        border: 4px solid silver;
+        margin: 0;
+        width: 300px;
+        height: 200px;
+    }
+    .item_price{
+        font-weight: bold;
+        font-size: 25px;
+        float: left;
+        color: #424242;
+        margin-top: 10px;
+    }
+    .item button{
+        transition: 0.2s linear;
+        margin-top: 10px;
+        border: 2px solid silver;
+        border-radius: 10px;
+        padding: 15px 10px;
+        background-color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .item button:hover{
+        background-color: silver;
+        color: white;
+    }
+    /*FOOTER*/
+    footer{
+        margin-top: 50px;
+        background-color: #212121;
+        color: aliceblue;
+        height: 300px;
+        text-align: center;
+    }
+</style>
+</html>

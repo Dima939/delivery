@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Корзина</h1>
+        <div class="back"><a href="/">На главную</a></div>
+        {% if products %}
+        {% for product in products %}
+        <div class="item">
+            <div class="item_content">
+                <a href="/product/{{product.name}}"><img src="{{product.image.url}}"></a>
+                <div class="item_text">
+                    <div class="item_title"><a href="/product/{{product.name}}"><h2>{{product.name}}</h2></a></div>
+                    <div class="item_price">{{product.price}} BYN</div>
+                </div>
+                <button onclick="window.location.href = '/delete/{{product.pk}}'">Удалить из корзины</button>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="sum"><h2>Итого к оплате: {{sum}} BYN</h2></div>
+        <h3>Использовать бонусы: {{user.balance}} BYN?</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form">
+                <label>Да</label>
+                <input type="radio" value="yes" name="choice">
+                <label>Нет</label>
+                <input type="radio" value="no" name="choice">
+            </div>
+            <div class="btn">
+                <input type="submit" value="Оформить заказ">
+            </div>
+        </form>
+        {% else %}
+        <h2>Корзина пуста</h2>
+        {% endif %}
+    </div>
+</body>
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background: url(/media/images/bg.jpg) no-repeat;
+        background-size: cover;
+    }
+    .container{
+        margin: auto;
+        margin-top: 50px;
+        border: 4px solid #757575;
+        border-radius: 15px;
+        background-color: #eeeeee;
+        text-align: center;
+        width: 900px;
+    }
+    h1, h2{
+        margin: 20px;
+        color: #424242;
+    }
+    .back{
+        margin: 20px;
+    }
+    .back a{
+        color: #424242;
+        font-size: 20px;
+        transition: color 0.2s linear;
+    }
+    .back a:hover{
+        color: silver;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    .item_content{
+        display: flex;
+        flex-direction: column;
+    }
+    .item{
+        text-align: center;
+        margin: auto;
+        margin-top: 50px;
+        width: 310px;
+    }
+    .item img:hover{
+        opacity: 0.6;
+    }
+    .item h2{
+        color: #424242;
+        transition: color 0.2s linear;
+        font-size: 23px;
+        margin: 0;
+    }
+    .item h2:hover{
+        color: aliceblue;
+    }
+    .item_title{
+        height: 35px;
+        background-color: silver;
+        border-bottom: 5px solid #757575;
+    }
+    .item img{
+        transition: opacity 0.2s linear;
+        border: 4px solid silver;
+        margin: 0;
+        width: 300px;
+        height: 200px;
+    }
+    .item_price{
+        font-weight: bold;
+        font-size: 25px;
+        float: left;
+        color: #424242;
+        margin-top: 10px;
+    }
+    .item button{
+        transition: 0.2s linear;
+        margin-top: 10px;
+        border: 2px solid silver;
+        border-radius: 10px;
+        padding: 10px 5px;
+        background-color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .item button:hover{
+        background-color: silver;
+        color: white;
+    }
+    .sum{
+        color: #424242;
+        margin: 20px;
+        font-size: 20px;
+    }
+    h3{
+        color: #424242;
+        margin: 20px;
+        font-size: 20px;
+    }
+    form{
+        color: #424242;
+        margin: 20px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .form input{
+        margin: 10px;
+    }
+    .btn input{
+        margin-top: 15px;
+        padding: 5px 40px;
+        font-size: 15px;
+        border: 2px solid silver;
+        border-radius: 10px;
+        transition: 0.2s linear;
+    }
+    .btn input:hover{
+        color: white;
+        background-color: silver;
+    }
+</style>
+</html>
