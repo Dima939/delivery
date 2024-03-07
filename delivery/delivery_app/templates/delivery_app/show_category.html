@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="categories">
+        <a href="{% url 'home' %}"><= На главную</a>
+        {% for cat in cats %}
+            {% if cat in cats_list %}
+                {% if cat.name == title %}
+                    <p>{{cat.name}}</p>
+                {% else %}
+                    <a href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="menu">
+        {% for product in products %}
+        <a href="{{product.get_absolute_url}}">
+        <div class="cart_product">
+            <img src="{{product.photo.url}}">
+            <div class="product_info">
+                <h3>{{product.name}}</h3>
+                <p>{{product.structure|capfirst|slice:140}}...</p>
+                <p class="price">{{product.price}} BYN</p>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

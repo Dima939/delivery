@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'delivery_app/css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="cart_head">
+        <a href="{% url 'home' %}"><= На главную</a>
+        {% if products %}
+        <p>Итоговая сумма {{sum}} BYN</p>
+        {% endif %}
+    </div>
+    {% if products %}
+        <div class="cart_menu">
+        {% for product in products %}
+            <div class="cart_content">
+                <a href="{{product.get_absolute_url}}" class="cart_link">
+                    <div class="cart_product">
+                        <img src="{{product.photo.url}}">
+                        <div class="product_info">
+                            <h3>{{product.name}}</h3>
+                            <p>{{product.structure|capfirst|slice:140}}...</p>
+                            <p class="price">{{product.price}} BYN</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/delete_product/{{product.slug}}" class="del_product">Убрать из корзины</a>
+            </div>
+        {% endfor %}
+
+            <a href="{% url 'order' %}" class="order">Оформить заказ</a>
+    {% else %}
+        <h2 class="empty_cart">Корзина пуста</h2>
+    {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'delivery_app/css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="login">
+        <a href="{% url 'cart' %}"><= Назад</a>
+        <p class="order_sum">Итоговая сумма: {{sum}} BYN</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="order_form">
+                {% for f in form %}
+                {% if forloop.last %}
+                <div class="checkbox_block">
+                    <label class="checkbox_info">Исользовать бонусы? {{user.bonus}} BYN</label>
+                    {{f}}
+                </div>
+                {% else %}
+                <label>{{f.label}}:</label>
+                {{f}}
+                {% endif %}
+                {% endfor %}
+                <button type="submit">Оформить</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

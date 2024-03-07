@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="categories">
+        <a href="{% url 'home' %}"><= На главную</a>
+    </div>
+
+    <div class="product_detail">
+        <div class="product_head">
+            <h1>{{product.name}}</h1>
+            <img src="{{product.photo.url}}">
+        </div>
+        <div class="product_content">
+            <p class="description">{{product.description}}</p>
+            <p class="structure">Состав: {{product.structure}}</p>
+        </div>
+        <div class="product_action">
+            <h3>{{product.price}} BYN</h3>
+            <a href="/add_product/{{product.slug}}">В корзину</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

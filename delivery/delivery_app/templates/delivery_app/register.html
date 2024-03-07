@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'delivery_app/css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="login">
+        <a href="{% url 'home' %}"><= На главную</a>
+
+        <form method="post">
+            {% csrf_token %}
+            {% for f in form %}
+            <label>{{f.label}}:</label>
+            <div class="field">{{f}}</div>
+            {% endfor %}
+            <button type="submit">Регистрация</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
